@@ -20,7 +20,8 @@ class SinglyLinkedList {
   push(val) {
     var newNode = new Node(val);
     if (!this.head) {
-      this.head = newNode;
+      // head가 없다면
+      this.head = newNode; //head, tail 같은 것 가리키기
       this.tail = this.head;
     } else {
       this.tail.next = newNode;
@@ -129,3 +130,7 @@ class SinglyLinkedList {
 }
 
 var list = new SinglyLinkedList();
+
+list.push("1");
+list.push("2");
+list.push("3");
