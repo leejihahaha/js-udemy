@@ -18,13 +18,13 @@ class SinglyLinkedList {
     this.length = 0;
   }
   push(val) {
-    var newNode = new Node(val);
+    var newNode = new Node(val); //새 노드 생성
     if (!this.head) {
       // head가 없다면
       this.head = newNode; //head, tail 같은 것 가리키기
       this.tail = this.head;
     } else {
-      this.tail.next = newNode;
+      this.tail.next = newNode; //마지막 노드의 next가 새 노드 가리킴
       this.tail = newNode; // push 동작 전 마지막 노드
     }
     this.length++;
