@@ -98,11 +98,11 @@ class DoublyLinkedList {
   }
   // get:인덱스 값을 받아 해당 인덱스의 노드를 리턴
   //1.싱글 링크드 리스트와 다르게, tail 에서 거슬러 올라가는 것이 가능(prev)
-  //2.그래서 후반부 인덱스가 주어진 경우, tail에서 prev를 통해 값을 찾는다
-  // 3. 리스트 인덱스 범위를 초과하는 값이 주어지면 null 을 리턴한다
-  // 4. 인덱스가 리스트 길이의 절반보다 같거나 작으면 head 부터 출발
-  // 5. 인덱스가 리스트 길이의 절반보다 크면 tail 부터 출발
-  // 6. 노드를 찾으면 그 값을 반환한다
+  //2. 그래서 후반부 인덱스가 주어진 경우, tail에서 prev를 통해 값을 찾는다
+  //3. 리스트 인덱스 범위를 초과하는 값이 주어지면 null 을 리턴한다
+  //4. 인덱스가 리스트 길이의 절반보다 같거나 작으면 head 부터 출발
+  //5. 인덱스가 리스트 길이의 절반보다 크면 tail 부터 출발
+  //6. 노드를 찾으면 그 값을 반환한다
   get(idx) {
     if (idx < 0 || idx > this.length - 1) return null;
     let count;
@@ -111,17 +111,70 @@ class DoublyLinkedList {
       count = 0;
       currentNode = this.head;
       while (count !== idx) {
-        count++;
         currentNode = currentNode.next;
+        count++;
       }
     } else {
       count = this.length - 1;
       currentNode = this.tail;
       while (count !== idx) {
-        count--;
         currentNode = currentNode.prev;
+        count--;
       }
     }
     return currentNode;
+  }
+  // set:인덱스 값과 밸류값을 받아 해당 인덱스의 노드의 밸류를 변경하고 성공시 true 반환
+  // 1. get 메서드를 활용해 인덱스의 노드를 새로운 변수에 할당
+  // 2. get 메서드가 유효한 노드를 반환하면 값을 변경하고 true를 반환
+  // 3. 아니면 false를 출력
+  set(idx, val) {
+    let foundNode = this.get(idx);
+    if (!foundNode) return false;
+    foundNode.val = val;
+    return true;
+  }
+  // insert : 인덱스 값과 밸류 값을 받아 해당 인덱스 자리에 밸류를 가진 새로운 노드를 끼워넣고 true 반환
+  // 1.tail에서 prev로 거슬러 올라올 수도 있으므로 주어진 인덱스의 크기에 따라 결정
+  // 2.유효하지 않은 인덱스가 주어지면 false를 반환
+  // 3.index가 0이면, unshift 사용
+  // 4.index가 length - 1 이면, push 사용
+  // 5.원래 index의 노드를 뒤로 밀어내고 연결 재수립
+  // 6.길이를 1 증가
+
+  insert(idx, val) {
+    if (idx < 0 || idx > this.length - 1) return false;
+    if (idx === 0 && this.unshift(val)) return true;
+    if (idx === this.length - 1 && this.push(val)) return true;
+    const newNode = new Node(val);
+    const prevNode = this.get(idx - 1);
+    const originalNode = this.get(idx);
+    prevNode.next = newNode;
+    newNode.prev = prevNode;
+    newNode.next = originalNode;
+    originalNode.prev = newNode;
+    this.length++;
+    return true;
+  }
+  // remove : 인덱스 값을 받아 해당 인덱스의 노드를 제거하고 제거된 노드 반환
+  // 1.유효하지 않은 인덱스가 주어지면 undefined를 반환
+  // 2.index가 0이면, shift 사용
+  // 3.index가 length - 1이면, pop 사용
+  // 4.제거될 노드 찾기 위해 get 메서드 사용
+  // 5.제거될 노드 전 후 의 연결 재수립
+  // 6.제거된 노드는 next와 prev를 null로 지정한다
+  // 7.길이를 1 감소
+
+  remove(idx) {
+    if (idx < 0 || idx > this.length - 1) return undefined;
+    if (idx === 0) return this.shift();
+    if (idx === this.length - 1) return this.pop();
+    const foundNode = this.get(idx);
+    foundNode.prev.next = foundNode.next;
+    foundNode.next.prev = foundNode.prev;
+    foundNode.prev = null;
+    foundNode.next = null;
+    this.length--;
+    return foundNode;
   }
 }
