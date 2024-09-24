@@ -31,10 +31,12 @@ class SinglyLinkedList {
     return this;
   }
   pop() {
+    //리스트의 마지막 요소를 제거하고 그 값을 반환
     if (!this.head) return undefined;
     var current = this.head;
-    var newTail = current;
+    var newTail = current; //새 tail이 됨
     while (current.next) {
+      // 리스트에 값이 남겨져 있는 동안 계속 반복
       newTail = current; //while 이 끝나면 tail 직전
       current = current.next; // while 이 끝나면 tail
     }
@@ -46,9 +48,10 @@ class SinglyLinkedList {
       this.head = null;
       this.tail = null;
     }
-    return current;
+    return current; //마지막 노드 반환
   }
   shift() {
+    // 앞에서 노드 제거
     if (!this.head) return undefined;
     var currentHead = this.head;
     this.head = currentHead.next;
@@ -71,7 +74,7 @@ class SinglyLinkedList {
   }
   get(index) {
     //node 자체를 반환
-    if (index < 0 || index >= this.length) return null;
+    if (index < 0 || index >= this.length) return null; //유효한지 체크
     var counter = 0;
     var current = this.head;
     while (counter !== index) {
