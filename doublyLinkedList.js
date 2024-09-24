@@ -54,4 +54,74 @@ class DoublyLinkedList {
     this.length--;
     return poppedNode;
   }
+  //1.길이가 0이라면 (빈 리스트라면) undefined를 리턴한다
+  //2. 현재 head를 미리 변수에 할당
+  //3. 길이가 1인 리스트라면 pop 실행 후 head와 tail을 null로 할당
+  //4. 제거 후 head를 원래 head 의 next 노드로 할당
+  //5. 새로운 head의 prev를 null로 할당
+  //6. old head의 next를 null로 할당
+  //7. length를 1 감소시킨다
+  shift() {
+    //앞에서 제거
+    if (this.length === 0) return undefined;
+    const oldHead = this.head;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head = this.head.next;
+      this.head.prev = null;
+      oldHead.next = null;
+    }
+    this.length--;
+    return oldHead;
+  }
+
+  //1. 새로운 노드 생성
+  //2. 리스트 길이가 0이면 head와 tail에 새로운 노드를 할당
+  //3. 길이가 0이 아니면 head의 prev에 새로운 노드를 할당
+  //4. 새 노드의 next에 기존 head를 할당
+  //5. 새 노드를 head로 할당
+  //6. 길이를 1 증가
+  unshift(val) {
+    const newNode = new Node(val);
+    if (this.length === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head.prev = newNode;
+      this.head = newNode;
+    }
+    this.length++;
+    return this;
+  }
+  // get:인덱스 값을 받아 해당 인덱스의 노드를 리턴
+  //1.싱글 링크드 리스트와 다르게, tail 에서 거슬러 올라가는 것이 가능(prev)
+  //2.그래서 후반부 인덱스가 주어진 경우, tail에서 prev를 통해 값을 찾는다
+  // 3. 리스트 인덱스 범위를 초과하는 값이 주어지면 null 을 리턴한다
+  // 4. 인덱스가 리스트 길이의 절반보다 같거나 작으면 head 부터 출발
+  // 5. 인덱스가 리스트 길이의 절반보다 크면 tail 부터 출발
+  // 6. 노드를 찾으면 그 값을 반환한다
+  get(idx) {
+    if (idx < 0 || idx > this.length - 1) return null;
+    let count;
+    let currentNode;
+    if (idx < this.length / 2) {
+      count = 0;
+      currentNode = this.head;
+      while (count !== idx) {
+        count++;
+        currentNode = currentNode.next;
+      }
+    } else {
+      count = this.length - 1;
+      currentNode = this.tail;
+      while (count !== idx) {
+        count--;
+        currentNode = currentNode.prev;
+      }
+    }
+    return currentNode;
+  }
 }
