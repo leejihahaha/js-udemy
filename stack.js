@@ -1,9 +1,3 @@
-// 스택에 원소를 하나 추가하고 size를 리턴(unshift)
-// 1.value를 파라미터로 받고 새 노드를 생성한다
-// 2.스택이 비어있다면 first와 last에 새 노드를 할당한다
-// 3.하나의 노드라도 있다면 이미 존재하는 노드를 저장할 임시 변수를 생성한다
-// 4.그리고 새 노드를 first에 할당하고 기존 노드를 next로 연결한다
-// 5.사이즈를 1 증가시킨다
 class Node {
   constructor(val) {
     this.val = val;
@@ -16,7 +10,12 @@ class Stack {
     this.first = null;
     this.last = null;
     this.size = 0;
-  }
+  } // 스택에 원소를 하나 추가하고 size를 리턴(unshift)
+  // 1.value를 파라미터로 받고 새 노드를 생성한다
+  // 2.스택이 비어있다면 first와 last에 새 노드를 할당한다
+  // 3.하나의 노드라도 있다면 이미 존재하는 노드를 저장할 임시 변수를 생성한다
+  // 4.그리고 새 노드를 first에 할당하고 기존 노드를 next로 연결한다
+  // 5.사이즈를 1 증가시킨다
   push(val) {
     const newNode = new Node(val);
     if (this.size === 0) {
@@ -28,7 +27,7 @@ class Stack {
       this.first = newNode;
       newNode.next = oldFirst;
     }
-    return ++this.size; // 만약 this.size++ 쓰면 일단 리턴되고 그담에 증가함 (표현식 먼저 수행하고 그다음에 증가)
+    return ++this.size; // 스택에 값을 추가한 직후 증가된 크기를 바로 반환하기 위해서
   }
   //   스택에서 최근에 추가된 노드를 제거하고 제거된 노드를 리턴(shift)
   //   1.스택이 비어있다면 null을 리턴
