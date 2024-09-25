@@ -1,3 +1,4 @@
+//이진탐색 트리에서 시작!!
 class Node {
   constructor(val) {
     this.val = val;
@@ -66,6 +67,59 @@ class BinarySearchTree {
     if (!found) return undefined;
     return current;
   }
-}
+  BFS() {
+    const data = [], //반환값
+      queue = [];
+    queue.push(this.root);
+    while (queue.length) {
+      //0은 false값을 갖음
+      const current = queue.shift(); //맨 앞에서 제거
+      data.push(current);
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);
+    }
+    return data;
+  }
+  DFSPreOrder() {
+    const data = [];
+    const current = this.root;
+    const traverse = (node) => {
+      data.push(node); // node.val로 해도 됨
+      node.left && traverse(node.left);
+      node.right && traverse(node.right);
+    };
+    traverse(current);
+    return data;
+  }
 
-// const tree = new BinarySearchTree();
+  DFSPostOrder() {
+    const data = [];
+    const current = this.root;
+    const traverse = (node) => {
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+      data.push(node); // node.val로 해도 됨
+    };
+    traverse(current);
+    return data;
+  }
+
+  DFSInorder() {
+    const data = [];
+    const current = this.root;
+    const traverse = (node) => {
+      if (node.left) traverse(node.left);
+      data.push(node); // node.val로 해도 됨
+      if (node.right) traverse(node.right);
+    };
+    traverse(current);
+    return data;
+  }
+}
+let tree = new BinarySearchTree();
+tree.insert(10);
+tree.insert(6);
+tree.insert(15);
+tree.insert(3);
+tree.insert(8);
+tree.insert(20);
