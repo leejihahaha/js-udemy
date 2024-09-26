@@ -8,16 +8,18 @@ class MaxBinaryHeap {
     this.values.push(element);
     this.bubbleUp();
   }
-
+  //   0  1  2  3  4  5  6
+  // [41,39,33,18,27,12,55 <--추가]
   bubbleUp() {
-    let idx = this.values.length - 1;
-    const element = this.values[idx];
+    let idx = this.values.length - 1; //6
+    const element = this.values[idx]; //55
     while (idx > 0) {
       // 루트 idx가 0이기 때문에
-      let parentIdx = Math.floor((idx - 1) / 2);
-      let parent = this.values[parentIdx];
-      if (element <= parent) break;
-      this.values[parentIdx] = element;
+      let parentIdx = Math.floor((idx - 1) / 2); //5 /2 => 3
+      let parent = this.values[parentIdx]; //33
+      if (element <= parent) break; //55 <= 33 elment가 parent보다 작거나 같으면 break;(커야함)
+      //swap
+      this.values[parentIdx] = element; //33 <-> 55
       this.values[idx] = parent;
       idx = parentIdx;
     }
