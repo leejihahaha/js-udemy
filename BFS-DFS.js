@@ -80,18 +80,21 @@ class BinarySearchTree {
     }
     return data;
   }
+  //전위
   DFSPreOrder() {
     const data = [];
     const current = this.root;
+    //헬퍼함수
     const traverse = (node) => {
       data.push(node); // node.val로 해도 됨
-      node.left && traverse(node.left);
+      //if(node.left) traverse(node.left)라고 해도됨
+      node.left && traverse(node.left); //왼쪽이 빌때까지
       node.right && traverse(node.right);
     };
     traverse(current);
     return data;
   }
-
+  //후위
   DFSPostOrder() {
     const data = [];
     const current = this.root;
@@ -103,7 +106,7 @@ class BinarySearchTree {
     traverse(current);
     return data;
   }
-
+  //중위
   DFSInorder() {
     const data = [];
     const current = this.root;
