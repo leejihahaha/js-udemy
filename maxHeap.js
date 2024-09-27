@@ -26,17 +26,19 @@ class MaxBinaryHeap {
   }
 
   // [41, 39, 33, 18, 27, 12]
+  //큰 값을 추출
   extractMax() {
     const max = this.values[0]; // 41
     const end = this.values.pop();
     if (this.values.length > 0) {
-      this.values[0] = end;
+      this.values[0] = end; //12
       this.sinkDown();
     }
     return max;
   }
 
   // swap 상태
+  //힙의 성질을 유지하기 위해 값을 재정렬
   sinkDown() {
     let idx = 0;
     const length = this.values.length;
