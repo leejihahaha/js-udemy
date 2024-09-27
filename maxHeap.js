@@ -29,9 +29,9 @@ class MaxBinaryHeap {
   //큰 값을 추출
   extractMax() {
     const max = this.values[0]; // 41
-    const end = this.values.pop();
+    const end = this.values.pop(); //12
     if (this.values.length > 0) {
-      this.values[0] = end; //12
+      this.values[0] = end; //12 [12,39,33,18,27,12]
       this.sinkDown();
     }
     return max;
@@ -40,15 +40,16 @@ class MaxBinaryHeap {
   // swap 상태
   //힙의 성질을 유지하기 위해 값을 재정렬
   sinkDown() {
-    let idx = 0;
+    let idx = 0; //맨 처음
     const length = this.values.length;
-    const element = this.values[0];
+    const element = this.values[0]; //옮겨서 위치시켜야하는 숫자
     while (true) {
       let leftIdx = 2 * idx + 1;
       let rightIdx = 2 * idx + 2;
       let left, right; // 범위 확인 전 초기화
       let swap = null;
       if (leftIdx < length) {
+        //인덱스가 유효한지
         left = this.values[leftIdx];
         if (left > element) {
           swap = leftIdx;
