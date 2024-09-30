@@ -58,8 +58,8 @@ class MaxBinaryHeap {
       if (rightIdx < length) {
         right = this.values[rightIdx];
         if (
-          (swap === null && right > element) ||
-          (swap !== null && right > left)
+          (swap === null && right > element) || //오른쪽자식과 부모노드 비교
+          (swap !== null && right > left) //오른쪽자식과 왼쪽 비교해서 오른쪽이 크면 swap에 오른쪽 저장
         ) {
           swap = rightIdx;
         }
