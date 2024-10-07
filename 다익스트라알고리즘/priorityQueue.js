@@ -1,3 +1,4 @@
+// 목표: 가장 작은 것을 먼저 꺼내기
 class PriorityQueue {
   constructor() {
     this.values = [];
@@ -16,7 +17,7 @@ class PriorityQueue {
 }
 
 const pq = new PriorityQueue();
-
+//삽입할때마다 정렬
 pq.enqueue("B", 3);
 pq.enqueue("C", 5);
 pq.enqueue("D", 2);
