@@ -15,7 +15,7 @@ class PriorityQueue {
     this.values.sort((a, b) => a.priority - b.priority);
   }
 }
-//가중그래프
+//가중그래프- 간선 정의
 class WeightedGraph {
   constructor() {
     this.adjacencyList = {};
@@ -96,3 +96,5 @@ g.addEdge("C", "F", 4);
 g.addEdge("D", "E", 3);
 g.addEdge("D", "F", 1);
 g.addEdge("F", "E", 1);
+
+g.dijkstra("A", "E");
